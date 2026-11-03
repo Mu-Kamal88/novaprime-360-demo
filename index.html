@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="NOVAPRIME Product 360 and Supplier 360: an interactive design walkthrough with clearly labelled illustrative data.">
+<title>NOVAPRIME | Product &amp; Supplier 360</title>
+<style>html{color-scheme:light dark}body{margin:0;padding:clamp(8px,2vw,24px);background:light-dark(#eef1f6,#101722)}#novaprime-review{max-width:1320px;margin:0 auto}</style>
+</head><body><script>
+(function(){var state=null;try{state=JSON.parse(localStorage.getItem('novaprime-review-state')||'null')}catch(e){}
+window.openai={widgetState:state,setWidgetState:function(value){window.openai.widgetState=value;try{localStorage.setItem('novaprime-review-state',JSON.stringify(value))}catch(e){}return Promise.resolve()}};
+})();
+</script><div id="novaprime-review" aria-label="NOVAPRIME product and supplier walkthrough">
+  <style>
+    #novaprime-review {
+      --np-bg: light-dark(#f5f7fa, #151b25);
+      --np-surface: light-dark(#ffffff, #1d2633);
+      --np-text: light-dark(#17263a, #e8eef7);
+      --np-muted: light-dark(#536477, #b0bfd2);
+      --np-line: light-dark(#dce3eb, #3a485c);
+      --np-accent: light-dark(#1758a3, #a6cfff);
+      --np-soft: light-dark(#eaf2fc, #263d59);
+      --np-warn: light-dark(#795000, #ffcf81);
+      --np-warn-bg: light-dark(#fff4db, #40341f);
+      --np-good: light-dark(#1c654c, #9fddc5);
+      --np-good-bg: light-dark(#e8f5ee, #243e35);
+      --np-danger: light-dark(#9c3038, #ffb5bc);
+      --np-danger-bg: light-dark(#fcecef, #482c34);
+      --np-space: 20px;
+      color-scheme: light dark;
+      font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+      color: var(--np-text);
+      width: 100%;
+      background: transparent;
+    }
+    #novaprime-review * { box-sizing: border-box; }
+    #novaprime-review [hidden] { display: none !important; }
+    #novaprime-review h1, #novaprime-review h2, #novaprime-review h3, #novaprime-review p { margin: 0; }
+    #novaprime-review h1 { font-size: 28px; line-height: 1.2; font-weight: 650; letter-spacing: -.6px; }
+    #novaprime-review h2 { font-size: 17px; line-height: 1.4; font-weight: 620; }
+    #novaprime-review h3 { font-size: 14px; font-weight: 620; }
+    #novaprime-review button, #novaprime-review select { font: inherit; }
+    #novaprime-review .np-app { background: var(--np-bg); border: 1px solid var(--np-line); border-radius: 12px; overflow: clip; }
+    #novaprime-review .np-chrome { background: var(--np-surface); padding: 16px 110px 16px 20px; display: flex; align-items: center; gap: 22px; flex-wrap: wrap; border-bottom: 1px solid var(--np-line); }
+    #novaprime-review .np-brand { display: flex; gap: 10px; align-items: center; }
+    #novaprime-review .np-monogram { display: grid; place-items: center; background: var(--np-text); color: var(--np-surface); border-radius: 6px; width: 32px; height: 32px; font-size: 12px; font-weight: 700; }
+    #novaprime-review .np-brand-name { font-weight: 750; letter-spacing: 1.5px; font-size: 13px; }
+    #novaprime-review .np-brand-sub { font-size: 11px; color: var(--np-muted); }
+    #novaprime-review .np-nav { display: flex; flex-wrap: wrap; gap: 6px; }
+    #novaprime-review .np-nav button { border: 0; background: transparent; color: var(--np-muted); padding: 8px 12px; border-radius: 6px; font-weight: 550; }
+    #novaprime-review .np-nav button[aria-pressed="true"] { background: var(--np-soft); color: var(--np-accent); }
+    #novaprime-review .np-notice { background: var(--np-warn-bg); color: var(--np-warn); padding: 9px 20px; font-size: 12px; font-weight: 550; }
+    #novaprime-review .np-toolbar { display: flex; flex-wrap: wrap; gap: 12px 22px; padding: 12px 20px; background: var(--np-surface); border-bottom: 1px solid var(--np-line); }
+    #novaprime-review label { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 12px; color: var(--np-muted); }
+    #novaprime-review select { max-width: 100%; border: 1px solid var(--np-line); border-radius: 5px; background: var(--np-surface); color: var(--np-text); padding: 5px 8px; font-size: 12px; }
+    #novaprime-review .np-main { padding: var(--np-space); display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--np-space); min-width: 0; }
+    #novaprime-review .np-page { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--np-space); min-width: 0; }
+    #novaprime-review .np-main > *, #novaprime-review .np-page > *, #novaprime-review .np-detail > * { min-width: 0; }
+    #novaprime-review .np-kicker { color: var(--np-accent); text-transform: uppercase; letter-spacing: 1.2px; font-size: 11px; font-weight: 700; margin-bottom: 5px; }
+    #novaprime-review .np-description { color: var(--np-muted); margin-top: 5px; }
+    #novaprime-review .np-meta { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: 12px; color: var(--np-muted); font-size: 12px; }
+    #novaprime-review .np-meta strong { color: var(--np-text); font-weight: 600; }
+    #novaprime-review .np-banner { padding: 12px 14px; border-left: 3px solid var(--np-warn); background: var(--np-warn-bg); color: var(--np-warn); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; font-size: 13px; }
+    #novaprime-review .np-banner.neutral { border-color: var(--np-accent); background: var(--np-soft); color: var(--np-accent); }
+    #novaprime-review .np-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    #novaprime-review .np-stat { padding: 13px 15px; background: var(--np-surface); border: 1px solid var(--np-line); border-radius: 7px; min-width: 0; }
+    #novaprime-review .np-stat-label { color: var(--np-muted); font-size: 12px; }
+    #novaprime-review .np-stat-value { font-size: 23px; font-weight: 650; line-height: 1.3; margin-top: 4px; font-variant-numeric: tabular-nums; }
+    #novaprime-review .np-small { color: var(--np-muted); font-size: 12px; }
+    #novaprime-review .np-section-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 16px; margin-bottom: 10px; }
+    #novaprime-review .np-table-wrap { overflow: auto; min-width: 0; max-width: 100%; border: 1px solid var(--np-line); border-radius: 7px; background: var(--np-surface); }
+    #novaprime-review table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    #novaprime-review .np-source-table { min-width: 780px; }
+    #novaprime-review th { text-align: left; color: var(--np-muted); font-size: 11px; font-weight: 650; padding: 10px 12px; background: var(--np-bg); }
+    #novaprime-review td { text-align: left; padding: 15px 12px; border-top: 1px solid var(--np-line); vertical-align: top; }
+    #novaprime-review td strong { font-size: 13px; font-weight: 620; }
+    #novaprime-review .np-sub { display: block; font-size: 11px; margin-top: 5px; color: var(--np-muted); line-height: 1.5; }
+    #novaprime-review .np-pill { display: inline-block; border-radius: 4px; padding: 3px 6px; font-size: 11px; font-weight: 600; color: var(--np-muted); background: var(--np-bg); }
+    #novaprime-review .np-pill.good { color: var(--np-good); background: var(--np-good-bg); }
+    #novaprime-review .np-pill.warn { color: var(--np-warn); background: var(--np-warn-bg); }
+    #novaprime-review .np-pill.hold { color: var(--np-danger); background: var(--np-danger-bg); }
+    #novaprime-review .np-link { color: var(--np-accent); background: transparent; border: 0; padding: 0; text-align: left; text-decoration: underline; text-underline-offset: 3px; }
+    #novaprime-review .np-button { background: var(--np-surface); border: 1px solid var(--np-line); color: var(--np-text); border-radius: 5px; padding: 7px 10px; white-space: normal; font-size: 12px; }
+    #novaprime-review .np-button.primary { background: var(--np-accent); color: var(--np-surface); border-color: var(--np-accent); }
+    #novaprime-review .np-block { border: 1px solid var(--np-line); background: var(--np-surface); border-radius: 7px; padding: 16px; min-width: 0; }
+    #novaprime-review .np-split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; min-width: 0; }
+    #novaprime-review .np-dl { margin: 14px 0; display: grid; grid-template-columns: minmax(110px, .65fr) minmax(0, 1.35fr); gap: 9px 12px; font-size: 12px; }
+    #novaprime-review dt { color: var(--np-muted); }
+    #novaprime-review dd { margin: 0; overflow-wrap: anywhere; }
+    #novaprime-review .np-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    #novaprime-review .np-row-between { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    #novaprime-review .np-detail { background: var(--np-surface); border: 1px solid var(--np-accent); border-radius: 7px; padding: 18px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 15px; }
+    #novaprime-review .np-detail table { min-width: 530px; }
+    #novaprime-review .np-context { color: var(--np-accent); font-size: 12px; }
+    #novaprime-review .np-step { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0; border-top: 1px solid var(--np-line); }
+    #novaprime-review .np-step-number { font-variant-numeric: tabular-nums; font-weight: 650; color: var(--np-accent); }
+    #novaprime-review .np-ledger { background: var(--np-bg); padding: 12px; border-radius: 5px; font-size: 12px; }
+    #novaprime-review .np-foot { font-size: 11px; color: var(--np-muted); border-top: 1px solid var(--np-line); padding-top: 12px; }
+    #novaprime-review .np-live { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    #novaprime-review[data-density="Compact"] { --np-space: 14px; }
+    #novaprime-review[data-density="Compact"] td { padding-top: 10px; padding-bottom: 10px; }
+    @media (max-width: 640px) {
+      #novaprime-review .np-chrome { padding-left: 14px; gap: 10px; }
+      #novaprime-review .np-toolbar { padding: 12px 14px; }
+      #novaprime-review .np-notice { padding-left: 14px; }
+      #novaprime-review .np-split { grid-template-columns: 1fr; }
+      #novaprime-review .np-stats { grid-template-columns: 1fr; gap: 8px; }
+      #novaprime-review .np-stat { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2px 10px; }
+      #novaprime-review .np-stat-value { font-size: 20px; margin: 0; }
+      #novaprime-review .np-stat .np-small { grid-column: 1 / -1; }
+      #novaprime-review h1 { font-size: 23px; }
+      #novaprime-review .np-main { padding: 14px; }
+      #novaprime-review .np-detail { padding: 14px; }
+      #novaprime-review .np-dl { grid-template-columns: 1fr; gap: 4px; }
+      #novaprime-review dd { margin-bottom: 8px; }
+    }
+    @media (pointer: coarse) {
+      #novaprime-review button, #novaprime-review select { min-height: 44px; }
+      #novaprime-review select { font-size: 16px; }
+    }
+  </style>
+  <div class="np-app">
+    <header class="np-chrome">
+      <div class="np-brand"><span class="np-monogram" aria-hidden="true">NP</span><div><div class="np-brand-name">NOVAPRIME</div><div class="np-brand-sub">Product &amp; supplier quality</div></div></div>
+      <nav class="np-nav" aria-label="360 views">
+        <button type="button" data-screen="product" aria-pressed="true">Product 360</button>
+        <button type="button" data-screen="supplier" aria-pressed="false">Supplier 360</button>
+      </nav>
+    </header>
+    <div class="np-notice" id="np-notice">ILLUSTRATIVE SCENARIO · Added supplier identities, tier, revisions, quantities and decisions are fictional.</div>
+    <div class="np-toolbar">
+      <label>Evidence view <select id="np-dataset"><option value="illustrative">Illustrative walkthrough</option><option value="supplied">Supplied pilot facts</option></select></label>
+      <label>Performance period <select id="np-period"><option value="12m">Rolling 12 months</option><option value="90d">Last 90 days</option></select></label>
+      <label id="np-supplier-picker" hidden>Supplier <select id="np-source"><option value="a">Example Supplier A</option><option value="b">Example Supplier B</option></select></label>
+    </div>
+    <main class="np-main">
+      <section class="np-page" id="np-product" aria-label="Product 360">
+        <div>
+          <div class="np-kicker">Product 360 / Brake components</div>
+          <h1>BRK-3401-V</h1>
+          <p class="np-description">Vented front brake disc · 300 mm · Cast iron G3000 · 5-bolt</p>
+          <div class="np-meta"><span>Tier <strong id="np-tier">Premium · illustrative</strong></span><span>Current requirement <strong id="np-revision">Rev D · illustrative</strong></span><span>Application <strong>C-segment · exact fitment unresolved</strong></span></div>
+        </div>
+        <div class="np-banner" id="np-product-banner"><span id="np-product-banner-text">1 current lot hold · technical qualification remains approved.</span><button class="np-button" type="button" data-open="case">Review quality case</button></div>
+        <div class="np-stats">
+          <div class="np-stat"><div class="np-stat-label">Manufacturing sources</div><div class="np-stat-value">2</div><div class="np-small">Alexandria / Line 2 · Ningbo / Line 4</div></div>
+          <div class="np-stat"><div class="np-stat-label">Inspection events</div><div class="np-stat-value" id="np-product-inspections">8</div><div class="np-small" id="np-product-inspections-basis">Selected period · unique events</div></div>
+          <div class="np-stat"><div class="np-stat-label" id="np-product-claims-label">Customer complaints</div><div class="np-stat-value" id="np-product-claims">1</div><div class="np-small" id="np-product-claims-basis">Selected period · investigation open</div></div>
+        </div>
+        <section>
+          <div class="np-section-head"><h2>Compare manufacturing sources</h2><span class="np-small">Qualification and restrictions shown as current</span></div>
+          <div class="np-table-wrap">
+            <table class="np-source-table" aria-label="Manufacturing source comparison">
+              <thead><tr><th scope="col">Supplier / production site</th><th scope="col">Qualification</th><th scope="col">Current restriction</th><th scope="col">Incoming PPM</th><th scope="col">Evidence</th><th scope="col">Source</th></tr></thead>
+              <tbody id="np-source-rows"></tbody>
+            </table>
+          </div>
+        </section>
+        <section class="np-block">
+          <div class="np-section-head"><h2>Complaint &amp; linked actions</h2><span class="np-pill warn" id="np-claim-pill">Investigation open</span></div>
+          <div class="np-row-between"><div><strong>Braking judder / vibration</strong><div class="np-small" id="np-claim-reference">CLM-DEMO-01 · Lot AX-DEMO-2609 · report awaiting diagnosis</div></div><button class="np-button" type="button" data-open="case">Open linked evidence</button></div>
+        </section>
+      </section>
+      <section class="np-page" id="np-supplier" aria-label="Supplier 360" hidden>
+        <div>
+          <div class="np-row-between"><div class="np-kicker">Supplier 360 / Selected-item context</div><button class="np-link" type="button" data-screen="product">Back to item sources</button></div>
+          <h1 id="np-supplier-name">Example Supplier A</h1>
+          <p class="np-description" id="np-supplier-site">Plant Alexandria · Line 2 · primary / local</p>
+          <div class="np-meta"><span>Item <strong>BRK-3401-V</strong></span><span>Tier <strong id="np-supplier-tier">Premium · illustrative</strong></span><span>Period <strong id="np-supplier-period">Rolling 12 months</strong></span></div>
+        </div>
+        <div class="np-banner" id="np-supplier-banner"><span id="np-supplier-banner-text">Lot AX-DEMO-2609 on hold · qualification remains approved.</span><button type="button" class="np-button" data-open="approval">Review approval scope</button></div>
+        <div class="np-stats">
+          <div class="np-stat"><div class="np-stat-label">Affiliated / supplying plants</div><div class="np-stat-value" id="np-supplier-plants">1 / 1</div><div class="np-small" id="np-supplier-plants-basis">Affiliated directory / active for selected item</div></div>
+          <div class="np-stat"><div class="np-stat-label">Distinct items supplied</div><div class="np-stat-value" id="np-supplier-items">1</div><div class="np-small">Received item codes in selected context</div></div>
+          <div class="np-stat"><div class="np-stat-label">Units received</div><div class="np-stat-value" id="np-supplier-units">20,000</div><div class="np-small">Selected item and performance period</div></div>
+        </div>
+        <section>
+          <div class="np-section-head"><h2>Plant performance</h2><span class="np-context">Item scope preserved: BRK-3401-V</span></div>
+          <div class="np-table-wrap"><table class="np-source-table" aria-label="Selected supplier plant performance"><thead><tr><th scope="col">Plant / line</th><th scope="col">Incoming PPM</th><th scope="col">Inspection coverage</th><th scope="col">Rejected lots</th><th scope="col">Current NCR / CAPA</th><th scope="col">Item</th></tr></thead><tbody id="np-plant-rows"></tbody></table></div>
+        </section>
+        <div class="np-split">
+          <section class="np-block"><h2>Qualification</h2><dl class="np-dl" id="np-qualification"></dl><button type="button" class="np-link" data-open="approval">Inspect submission and disposition</button></section>
+          <section class="np-block"><h2>Current restriction</h2><dl class="np-dl" id="np-restriction"></dl><button type="button" class="np-link" data-open="case">Review related quality evidence</button></section>
+        </div>
+      </section>
+      <section class="np-detail" id="np-detail" aria-label="Selected evidence" hidden>
+        <div class="np-row-between"><div><div class="np-kicker" id="np-detail-kicker">Evidence review</div><h2 id="np-detail-title">Linked quality records</h2></div><button class="np-button" type="button" id="np-detail-close">Close detail</button></div>
+        <div id="np-detail-content"></div>
+      </section>
+      <div class="np-foot" id="np-foot">Review date: 3 Nov 2026 · Illustrative values only · Actions affect this walkthrough.</div>
+    </main>
+  </div>
+  <div class="np-live" id="np-live" aria-live="polite"></div>
+  <script>
+  (function () {
+    const root = document.getElementById('novaprime-review');
+    const initial = { dataset: 'illustrative', screen: 'product', source: 'a', period: '12m', detail: '', outcome: 'open', density: 'Comfortable' };
+    const state = Object.assign({}, initial);
+    const known = {
+      dataset: ['illustrative', 'supplied'], screen: ['product', 'supplier'],
+      source: ['a', 'b'], period: ['12m', '90d'], detail: ['', 'case', 'approval'],
+      outcome: ['open', 'verified', 'released'], density: ['Comfortable', 'Compact']
+    };
+    const site = {
+      a: { plant: 'Plant Alexandria', line: 'Line 2', supplier: 'Example Supplier A', role: 'Primary / local', qty: { '12m': 20000, '90d': 5000 }, defects: { '12m': 12, '90d': 12 }, inspections: { '12m': 8, '90d': 2 } },
+      b: { plant: 'Plant Ningbo', line: 'Line 4', supplier: 'Example Supplier B', role: 'Secondary / import', qty: { '12m': 0, '90d': 0 }, defects: { '12m': 0, '90d': 0 }, inspections: { '12m': 0, '90d': 0 } }
+    };
+    const byId = function (id) { return document.getElementById(id); };
+    const fmt = function (n) { return n.toLocaleString('en-US'); };
+    const demo = function () { return state.dataset === 'illustrative'; };
+    const hold = function () { return state.outcome !== 'released'; };
+    const periodName = function () { return state.period === '12m' ? 'Rolling 12 months' : 'Last 90 days'; };
+    const pill = function (s, kind) { return '<span class="np-pill ' + (kind || '') + '">' + s + '</span>'; };
+    const sub = function (s) { return '<span class="np-sub">' + s + '</span>'; };
+    const link = function (s, action, value) { return '<button type="button" class="np-link" data-' + action + '="' + value + '">' + s + '</button>'; };
+    const text = function (id, s) { byId(id).textContent = s; };
+    function applySaved(saved) {
+      if (!saved) return;
+      const values = saved.privateContent || saved.modelContent || saved;
+      Object.keys(known).forEach(function (key) { if (known[key].includes(values[key])) state[key] = values[key]; });
+    }
+    applySaved(window.openai && window.openai.widgetState);
+    function save() {
+      if (window.openai && typeof window.openai.setWidgetState === 'function') {
+        const snapshot = Object.assign({}, state);
+        window.openai.setWidgetState({
+          modelContent: { dataset: state.dataset, screen: state.screen, source: state.source, period: state.period, outcome: state.outcome },
+          privateContent: snapshot
+        }).catch(function () {});
+      }
+    }
+    function ppm(id) {
+      if (!demo()) return 'Unavailable';
+      const s = site[id], q = s.qty[state.period];
+      return q ? fmt(Math.round(s.defects[state.period] / q * 1000000)) : 'Not available';
+    }
+    function qualification(id) {
+      if (!demo()) return pill('Unverified') + sub(id === 'a' ? 'Level 3 package reported on file' : 'Pending / provisional description');
+      return id === 'a' ? pill('Approved', 'good') + sub('Rev D · Line 2') : pill('Interim approval', 'warn') + sub('Rev D · Line 4 · bounded');
+    }
+    function restriction(id) {
+      if (!demo()) return pill('Unverified') + sub('No restriction record supplied');
+      if (id === 'b') return pill('No hold recorded') + sub('Interim limits still apply');
+      return hold() ? pill('Lot hold active', 'hold') + sub('AX-DEMO-2609 only') : pill('Lot hold released', 'good') + sub('Separate quality authorization');
+    }
+    function metric(id) {
+      if (!demo()) return '<strong>Unavailable</strong>' + sub('Quantities not supplied');
+      const s = site[id], q = s.qty[state.period];
+      return '<strong>' + ppm(id) + '</strong>' + sub(q ? fmt(s.defects[state.period]) + ' assessed defective / ' + fmt(q) + ' received' : '0 received · no delivery evidence');
+    }
+    function sourceRows() {
+      return ['a', 'b'].map(function (id) {
+        const s = site[id];
+        const name = demo() ? s.supplier : 'Commercial supplier unknown';
+        const history = demo() ? s.inspections[state.period] + ' inspections' + sub(id === 'a' ? '1 complaint · cause unresolved' : 'No production-delivery history') + sub(id === 'a' ? (state.outcome === 'open' ? '1 open NCR · 1 active CAPA' : '0 open NCRs · 1 closed CAPA') : '0 recorded NCRs / CAPAs') : 'Item reports exist' + sub('Plant linkage / count unverified');
+        return '<tr><td><strong>' + link(s.plant, 'source-link', id) + '</strong>' + sub(s.line + ' · ' + s.role) + sub(name) + '</td><td>' + qualification(id) + '</td><td>' + restriction(id) + '</td><td>' + metric(id) + '</td><td>' + history + '</td><td><button type="button" class="np-button" data-source-link="' + id + '">Review</button></td></tr>';
+      }).join('');
+    }
+    function plantRow() {
+      const s = site[state.source], d = demo(), active = d && s.qty[state.period] > 0;
+      const coverage = !d ? 'Unavailable' : active ? s.inspections[state.period] + ' / ' + s.inspections[state.period] + ' received lots' + sub('All received lots inspected · sample-based') : 'Not applicable' + sub('No receipts');
+      const rejected = !d ? 'Unavailable' : active ? '1 / ' + s.inspections[state.period] + sub('Distinct received lots') : 'Not applicable';
+      const actions = !d ? 'Unavailable' : state.source === 'a' ? (state.outcome === 'open' ? '1 open NCR' : '0 open / 1 closed NCR') + sub(state.outcome === 'open' ? '1 active CAPA · effectiveness pending' : '1 closed CAPA · restriction separate') : '0 recorded';
+      return '<tr><td><strong>' + s.plant + '</strong>' + sub(s.line) + '</td><td>' + metric(state.source) + '</td><td>' + coverage + '</td><td>' + rejected + '</td><td>' + actions + '</td><td>' + link('BRK-3401-V', 'screen', 'product') + '</td></tr>';
+    }
+    function dl(rows) { return rows.map(function (r) { return '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>'; }).join(''); }
+    function render() {
+      const d = demo(), s = site[state.source], a = state.source === 'a';
+      root.dataset.density = state.density;
+      byId('np-dataset').value = state.dataset;
+      byId('np-period').value = state.period;
+      byId('np-source').value = state.source;
+      byId('np-supplier-picker').hidden = state.screen !== 'supplier';
+      byId('np-source').options[0].textContent = d ? 'Example Supplier A' : 'Alexandria source · supplier unknown';
+      byId('np-source').options[1].textContent = d ? 'Example Supplier B' : 'Ningbo source · supplier unknown';
+      root.querySelectorAll('.np-nav [data-screen]').forEach(function (button) { button.setAttribute('aria-pressed', String(button.dataset.screen === state.screen)); });
+      byId('np-product').hidden = state.screen !== 'product';
+      byId('np-supplier').hidden = state.screen !== 'supplier';
+      text('np-notice', d ? 'ILLUSTRATIVE SCENARIO · Added supplier identities, tier, revisions, quantities and decisions are fictional.' : 'SUPPLIED PILOT FACTS · Unknown fields remain unverified. Real sourcing eligibility is not established.');
+      text('np-tier', d ? 'Premium · illustrative' : 'Unknown');
+      text('np-revision', d ? 'Rev D · illustrative' : 'Unknown');
+      text('np-product-banner-text', !d ? 'Signed approval, tier and requirement revision need verification.' : hold() ? '1 current lot hold · technical qualification remains approved.' : 'Lot hold released by a separate decision · qualification history preserved.');
+      byId('np-product-banner').classList.toggle('neutral', !d || !hold());
+      text('np-product-inspections', d ? fmt(site.a.inspections[state.period]) : 'Unknown');
+      text('np-product-inspections-basis', d ? 'Selected period · unique events' : 'Receiving reports reported; count not supplied');
+      text('np-product-claims-label', d ? 'Customer complaints' : 'Reported lifetime complaints');
+      text('np-product-claims', '1');
+      text('np-product-claims-basis', d ? 'Selected period · investigation open' : 'Report date / period not supplied');
+      byId('np-source-rows').innerHTML = sourceRows();
+      text('np-claim-reference', d ? 'CLM-DEMO-01 · Lot AX-DEMO-2609 · report awaiting diagnosis' : 'One lot-linked report · lot identifier and diagnosis not supplied');
+      text('np-claim-pill', d ? 'Investigation open' : 'Finding unverified');
+      text('np-supplier-name', d ? s.supplier : 'Commercial supplier unknown');
+      text('np-supplier-site', s.plant + ' · ' + s.line + ' · ' + s.role);
+      text('np-supplier-tier', d ? 'Premium · illustrative' : 'Unknown');
+      text('np-supplier-period', periodName());
+      text('np-supplier-banner-text', !d ? 'Commercial supplier identity and authorized disposition are unverified.' : !a ? 'Interim authorization: at most 120 units, through 17 Nov 2026 · illustrative.' : hold() ? 'Lot AX-DEMO-2609 on hold · qualification remains approved.' : 'Lot AX-DEMO-2609 released · qualification remains approved.');
+      byId('np-supplier-banner').classList.toggle('neutral', d && a && !hold());
+      text('np-supplier-plants', d ? '1 / ' + (a ? '1' : '0') : 'Unknown');
+      text('np-supplier-plants-basis', d ? 'Sample directory / active for selected item' : 'One pilot site; supplier affiliation unresolved');
+      text('np-supplier-items', d ? (a ? '1' : '0') : 'Unknown');
+      text('np-supplier-units', d ? fmt(s.qty[state.period]) : 'Unknown');
+      byId('np-plant-rows').innerHTML = plantRow();
+      byId('np-qualification').innerHTML = dl([
+        ['Submission', !d ? (a ? 'Level 3 reported on file' : 'Pending / provisional; unclear') : 'Level 3 · submitted'],
+        ['Disposition', !d ? 'Unverified' : a ? 'Approved · illustrative' : 'Interim · illustrative'],
+        ['Scope', 'BRK-3401-V · ' + s.line + (d ? ' · Rev D' : ' · revision unknown')],
+        ['Authority', d ? 'Example SQE · demo decision' : 'Signed decision not supplied']
+      ]);
+      byId('np-restriction').innerHTML = dl([
+        ['Current state', !d ? 'Unverified' : !a ? 'No hold recorded; interim limits apply' : hold() ? 'Lot hold active' : 'Lot hold released'],
+        ['Scope', !d ? 'Not supplied' : a ? 'Lot AX-DEMO-2609 only' : 'Interim: 120 units / 17 Nov 2026'],
+        ['CAPA', !d ? 'No record supplied' : !a ? 'None recorded' : state.outcome === 'open' ? 'Effectiveness pending' : 'Closed after verification'],
+        ['Order enforcement', 'Advisory in this review']
+      ]);
+      text('np-foot', d ? 'Review date: 3 Nov 2026 · Illustrative values only · Period changes preserve current restrictions and actions.' : 'Supplied evidence baseline · Technical limits and sourcing eligibility remain unverified.');
+      renderDetail();
+      root.querySelectorAll('button').forEach(function (button) { button.classList.add('cursor-interaction'); });
+    }
+    function renderDetail() {
+      const panel = byId('np-detail');
+      panel.hidden = !state.detail;
+      if (!state.detail) return;
+      if (state.detail === 'approval') renderApproval(); else renderCase();
+    }
+    function renderApproval() {
+      const d = demo(), s = site[state.source], a = state.source === 'a';
+      text('np-detail-kicker', 'Submission / authorized disposition / current restriction');
+      text('np-detail-title', s.plant + ' · ' + s.line);
+      const requirements = d ? [
+        ['Item / revision', 'BRK-3401-V / Rev D · illustrative'],
+        ['Submission reference', a ? 'PPAP-DEMO-A · Level 3' : 'PPAP-DEMO-B · Level 3'],
+        ['Authorized disposition', a ? 'Approved: QA-DEMO-A' : 'Interim: QA-DEMO-B'],
+        ['Production scope', s.plant + ' / ' + s.line + ' / defined submitted process'],
+        ['Conditions', a ? 'Approved process; current lot hold remains independent' : 'Controlled introduction; 120 units maximum; expiry 17 Nov 2026; additional checks per demo authorization'],
+        ['Requirement basis', 'Drawing revision is illustrative; engineering limits are not supplied'],
+        ['Current restriction', !a ? 'No hold recorded; interim boundaries still apply' : hold() ? 'HOLD-DEMO-01 active for AX-DEMO-2609' : 'HOLD-DEMO-01 separately released by Example SQE']
+      ] : [
+        ['Item / revision', 'BRK-3401-V / revision unknown'],
+        ['Submission evidence', a ? 'Level 3 package reported on file' : 'Provisional/pending Level 3; wording unresolved'],
+        ['Authorized disposition', 'Unverified: signed decision and scope not supplied'],
+        ['Production site / line', s.plant + ' / ' + s.line],
+        ['Interim limits / expiry', 'Not supplied; no allowance inferred'],
+        ['Technical acceptance', 'Drawing, method, standard/version and limits require verification']
+      ];
+      byId('np-detail-content').innerHTML = '<dl class="np-dl">' + dl(requirements) + '</dl>';
+    }
+    function renderCase() {
+      const d = demo();
+      text('np-detail-kicker', d ? 'Illustrative linked-record review' : 'Supplied claim evidence');
+      text('np-detail-title', 'Judder / vibration · BRK-3401-V');
+      if (!d) {
+        byId('np-detail-content').innerHTML = '<dl class="np-dl">' + dl([
+          ['Complaint count', 'One reported claim'],
+          ['Traceability', 'Reported as linked to a production lot; identifier not supplied'],
+          ['Plant / line', 'Not supplied; attribution remains unverified'],
+          ['Diagnosis / responsibility', 'Not supplied; no manufacturing defect inferred'],
+          ['Accountable defective quantity', 'Not established'],
+          ['NCR / CAPA / restriction', 'No actual records supplied']
+        ]) + '</dl>';
+        return;
+      }
+      if (state.screen === 'supplier' && state.source === 'b') {
+        text('np-detail-title', 'Ningbo source · quality evidence');
+        byId('np-detail-content').innerHTML = '<div class="np-ledger"><strong>No quality cases linked to this illustrative Ningbo source.</strong><div class="np-small">The item-wide judder complaint is linked to the Alexandria lot in this scenario. Ningbo has no delivery history; this is not evidence of zero-defect performance.</div></div><div style="margin-top:14px">' + link('Return to item sources', 'screen', 'product') + '</div>';
+        return;
+      }
+      const closed = state.outcome !== 'open';
+      const rows = [
+        ['Complaint', 'CLM-DEMO-01', 'Judder report; diagnosis remains open', 'Excluded from accountable PPM'],
+        ['Incoming NCR', 'NCR-DEMO-01', closed ? 'Separate receiving nonconformance; disposition approved and NCR closed' : 'Separate receiving nonconformance; disposition pending', 'Quality-approved defective pieces: ' + site.a.defects[state.period] + ' in selected cohort'],
+        ['CAPA', 'CAPA-DEMO-01', closed ? 'Closed; illustrative effectiveness approval recorded' : 'Action implemented; effectiveness verification pending', 'Closure does not release lot hold'],
+        ['Lot restriction', 'HOLD-DEMO-01', hold() ? 'Active: AX-DEMO-2609 only' : 'Released by a separate illustrative quality decision', 'Qualification remains approved']
+      ].map(function (r) { return '<tr><td><strong>' + r[0] + '</strong>' + sub(r[1]) + '</td><td>' + r[2] + '</td><td>' + r[3] + '</td></tr>'; }).join('');
+      const qty = site.a.qty[state.period], count = site.a.defects[state.period];
+      byId('np-detail-content').innerHTML =
+        '<div class="np-row-between"><span class="np-small">Illustrative Alexandria / Line 2 · all added record IDs and outcomes are fictional.</span><label>Outcome preview <select id="np-outcome"><option value="open">Effectiveness pending / hold active</option><option value="verified">CAPA verified and closed / hold active</option><option value="released">CAPA closed / hold separately released</option></select></label></div>' +
+        '<div class="np-table-wrap" style="margin-top:14px"><table aria-label="Linked quality records"><thead><tr><th scope="col">Record</th><th scope="col">Current state</th><th scope="col">Measurement / decision boundary</th></tr></thead><tbody>' + rows + '</tbody></table></div>' +
+        '<div class="np-ledger" style="margin-top:14px"><strong>Selected receipt cohort</strong><div>' + fmt(count) + ' assessed defective pieces / ' + fmt(qty) + ' received · ' + fmt(count / qty * 1000000) + ' accountable incoming PPM.</div><div class="np-small">Complaint, NCR and CAPA references do not multiply defective-piece quantities. This count-based scorecard is not a sampled defect-prevalence estimate.</div></div>' +
+        (closed ? '<div class="np-step"><span class="np-step-number">✓</span><div><strong>Illustrative effectiveness evidence accepted</strong><div class="np-small">The approved observation criteria and relevant production exposure have been met in this scenario. The complaint investigation remains separate.</div></div></div>' : '<div class="np-step"><span class="np-step-number">→</span><div><strong>Quality owner: verify effectiveness</strong><div class="np-small">Defined acceptance criteria, observation window and relevant exposure are required before CAPA closure.</div></div></div>');
+      byId('np-outcome').value = state.outcome;
+    }
+    function changed(message) { render(); text('np-live', message); save(); }
+    root.addEventListener('click', function (event) {
+      const button = event.target.closest('button');
+      if (!button || !root.contains(button)) return;
+      if (button.dataset.sourceLink) {
+        state.source = button.dataset.sourceLink; state.screen = 'supplier'; state.detail = '';
+        changed('Supplier view opened for ' + site[state.source].plant + '. Item and period preserved.');
+      } else if (button.dataset.screen) {
+        state.screen = button.dataset.screen; state.detail = '';
+        changed(state.screen === 'product' ? 'Product source comparison opened.' : 'Supplier view opened with item context preserved.');
+      } else if (button.dataset.open) {
+        state.detail = button.dataset.open; changed('Evidence detail opened.');
+      } else if (button.id === 'np-detail-close') {
+        state.detail = ''; changed('Evidence detail closed.');
+      }
+    });
+    root.addEventListener('change', function (event) {
+      const id = event.target.id;
+      if (id === 'np-dataset') { state.dataset = event.target.value; state.detail = ''; changed('Evidence view changed.'); }
+      else if (id === 'np-period') { state.period = event.target.value; changed('Performance period changed; current restrictions remain visible.'); }
+      else if (id === 'np-source') { state.source = event.target.value; state.detail = ''; changed('Selected supplier changed; item context preserved.'); }
+      else if (id === 'np-outcome') { state.outcome = event.target.value; changed('Illustrative outcome updated; approval, CAPA and restrictions remain separate.'); }
+    });
+    window.addEventListener('openai:set_globals', function (event) {
+      const saved = event.detail && event.detail.globals && event.detail.globals.widgetState;
+      if (saved) { applySaved(saved); render(); }
+    });
+    render();
+    if (globalThis.Tweak) {
+      const tweak = new Tweak({ container: root, onChange: function () { render(); save(); } });
+      tweak.addSelect(state, 'density', { label: 'Row spacing', options: ['Comfortable', 'Compact'] });
+    }
+  })();
+  </script>
+</div>
+</body></html>
